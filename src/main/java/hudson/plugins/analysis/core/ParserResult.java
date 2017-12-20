@@ -41,16 +41,16 @@ public class ParserResult implements Serializable {
 
     /** The parsed annotations. */
     @SuppressWarnings("Se")
-    private final Set<FileAnnotation> annotations = new HashSet<FileAnnotation>();
+    private final Set<FileAnnotation> annotations = new HashSet<>();
     /** The collection of error messages. */
     @SuppressWarnings("Se")
-    private final List<String> errorMessages = new ArrayList<String>();
+    private final List<String> errorMessages = new ArrayList<>();
     /** Number of annotations by priority. */
     @SuppressWarnings("Se")
-    private final Map<Priority, Integer> annotationCountByPriority = new HashMap<Priority, Integer>();
+    private final Map<Priority, Integer> annotationCountByPriority = new HashMap<>();
     /** The set of modules. */
     @SuppressWarnings("Se")
-    private final Set<String> modules = new HashSet<String>();
+    private final Set<String> modules = new HashSet<>();
     /** The workspace. */
     private final Workspace workspace;
     /** A mapping of relative file names to absolute file names. */
@@ -67,6 +67,7 @@ public class ParserResult implements Serializable {
      * @since 1.55
      */
     private final boolean canResolveRelativePaths;
+    private String id;
 
     /**
      * Creates a new instance of {@link ParserResult}.
@@ -135,7 +136,6 @@ public class ParserResult implements Serializable {
         addAnnotations(annotations);
     }
 
-
     /**
      * Adds the warnings of the specified project to this project.
      *
@@ -165,10 +165,7 @@ public class ParserResult implements Serializable {
                 }
             }
         }
-        catch (IOException exception) {
-            // ignore
-        }
-        catch (InterruptedException exception) {
+        catch (IOException | InterruptedException exception) {
             // ignore
         }
     }
@@ -455,6 +452,14 @@ public class ParserResult implements Serializable {
      */
     public String getLogMessages() {
         return StringUtils.defaultString(logMessage);
+    }
+
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 
     /**
